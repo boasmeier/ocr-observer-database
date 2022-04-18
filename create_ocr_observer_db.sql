@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `ocr_observer`.`image` (
   `idfields` INT NOT NULL,
   `idhistory` INT NOT NULL,
   `destination` VARCHAR(255) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `mimetype` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idimage`),
   UNIQUE INDEX `idimage_UNIQUE` (`idimage` ASC) VISIBLE,
