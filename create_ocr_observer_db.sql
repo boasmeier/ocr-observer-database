@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `ocr_observer`.`history_has_state` (
   `idhistory` INT NOT NULL,
   `idstate` INT NOT NULL,
   `timestamp` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idhistory`, `idstate`),
+  PRIMARY KEY (`timestamp`),
   INDEX `fk_history_has_state_state1_idx` (`idstate` ASC) VISIBLE,
   INDEX `fk_history_has_state_history1_idx` (`idhistory` ASC) VISIBLE,
   CONSTRAINT `fk_history_has_state_history1`
