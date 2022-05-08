@@ -107,7 +107,6 @@ CREATE TABLE IF NOT EXISTS `ocr_observer`.`image` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `ocr_observer`.`state`
 -- -----------------------------------------------------
@@ -132,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `ocr_observer`.`history_has_state` (
   CONSTRAINT `fk_history_has_state_history1`
     FOREIGN KEY (`idhistory`)
     REFERENCES `ocr_observer`.`history` (`idhistory`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_history_has_state_state1`
     FOREIGN KEY (`idstate`)
@@ -140,6 +139,21 @@ CREATE TABLE IF NOT EXISTS `ocr_observer`.`history_has_state` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE TRIGGER when_delete_task_also_delete_dataset BEFORE DELETE ON task
+FOR EACH ROW DELETE FROM dataset WHERE idtask = old.idtask;
+
+CREATE TRIGGER when_delete_dataset_also_delete_image BEFORE DELETE ON dataset
+FOR EACH ROW DELETE FROM image WHERE iddataset = old.iddataset;
+
+CREATE TRIGGER when_delete_image_also_delete_history AFTER DELETE ON image
+FOR EACH ROW DELETE FROM history WHERE idhistory = old.idhistory;
+
+CREATE TRIGGER when_delete_image_also_delete_fields AFTER DELETE ON image
+FOR EACH ROW DELETE FROM fields WHERE idfields = old.idfields;
+
+CREATE TRIGGER when_delete_histroy_also_delete_history_has_state AFTER DELETE ON history
+FOR EACH ROW DELETE FROM history_has_state WHERE idhistory = old.idhistory;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
