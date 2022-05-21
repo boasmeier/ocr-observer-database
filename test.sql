@@ -42,3 +42,11 @@ SELECT idfields, destination, name FROM (
 WHERE t.rn = 1
 AND state = 'Hochgeladen';
 
+# Get images of task
+SELECT i.idimage, i.iddataset, i.idfields, i.idhistory, i.destination, i.name, i.mimetype 
+FROM image as i JOIN dataset as d JOIN task as t
+WHERE i.iddataset = d.iddataset
+AND d.idtask = t.idtask
+AND t.idtask = 4;
+
+
