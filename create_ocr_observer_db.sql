@@ -20,10 +20,10 @@ USE `ocr_observer` ;
 CREATE TABLE IF NOT EXISTS `ocr_observer`.`fields` (
   `idfields` INT NOT NULL AUTO_INCREMENT,
   `signature` VARCHAR(45) NOT NULL,
-  `author` VARCHAR(255) NOT NULL,
-  `title` VARCHAR(255) NOT NULL,
-  `comment` VARCHAR(255) NOT NULL,
-  `category` VARCHAR(45) NULL,
+  `author` TEXT NOT NULL,
+  `title` TEXT NOT NULL,
+  `comment` TEXT NOT NULL,
+  `category` VARCHAR(255) NULL,
   PRIMARY KEY (`idfields`),
   UNIQUE INDEX `idfields_UNIQUE` (`idfields` ASC) VISIBLE)
 ENGINE = InnoDB;
